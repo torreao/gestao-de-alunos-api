@@ -1,22 +1,31 @@
 import { api } from './api.js';
 import 'dotenv/config';
 
-let tokenEmCache = null
+let tokenAdminEmCache = null;
 
 export async function comTokenDeAdmin() {
-    if (!tokenEmCache) {
+    if (!tokenAdminEmCache) {
         const loginResposta = await api()
             .post('/api/auth/login')
             .set('Content-Type', 'application/json')
             .send({ 
-                    email: process.env.ADMIN_EMAIL, 
-                    senha: process.env.ADMIN_SENHA
+                email: process.env.ADMIN_EMAIL, 
+                senha: process.env.ADMIN_SENHA
             });
         
-        tokenEmCache = loginResposta.body.token;
+        tokenAdminEmCache = loginResposta.body.token;
     }
 
-    return `Bearer ${tokenEmCache}`;
+    return `Bearer ${tokenAdminEmCache}`;
+}
+
+export async function comTokenDeAluno(email, senha) {
+    const loginResposta = await api()
+        .post('/api/auth/login')
+        .set('Content-Type', 'application/json')
+        .send({ email, senha });
+
+    return `Bearer ${loginResposta.body.token}`;
 }
 
 export async function getToken(emailUser, passUser) {

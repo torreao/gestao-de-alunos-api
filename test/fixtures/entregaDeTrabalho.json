@@ -1,0 +1,39 @@
+[
+  {
+    "descricao": "Aluno entrega um trabalho de Programação",
+    "aluno": {
+      "nome": "Carlos Ferreira",
+      "email": "carlos.ferreira@example.com",
+      "matricula": "2026-1001",
+      "senha": "senha123"
+    },
+    "disciplina": {
+      "nome": "Programação Orientada a Objetos",
+      "codigo": "POO201",
+      "cargaHoraria": "80h"
+    },
+    "trabalho": {
+      "titulo": "Implementação de Herança em Java",
+      "descricao": "Projeto prático demonstrando herança, polimorfismo e encapsulamento."
+    }
+  },
+  {
+    "descricao": "Aluno entrega um trabalho de Banco de Dados",
+    "aluno": {
+      "nome": "Mariana Costa",
+      "email": "mariana.costa@example.com",
+      "matricula": "2026-1002",
+      "senha": "senha456"
+    },
+    "disciplina": {
+      "nome": "Banco de Dados Relacional",
+      "codigo": "BDR301",
+      "cargaHoraria": "60h"
+    },
+    "trabalho": {
+      "titulo": "Modelagem ER: Sistema de Biblioteca",
+      "descricao": "Diagrama entidade-relacionamento e script SQL de criação das tabelas."
+    }
+  }
+]
+

@@ -1,0 +1,44 @@
+name: Testes Automatizados
+
+on:
+  push:
+    branches:
+      - main
+      - testes-de-api
+  pull_request:
+    branches:
+      - main
+      - testes-de-api
+
+jobs:
+  test:
+    name: Executar Testes de API
+    runs-on: ubuntu-latest
+
+    env:
+      BASE_URL: http://localhost:3000
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      ADMIN_SENHA: ${{ secrets.ADMIN_SENHA }}
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Iniciar o servidor em background
+        run: npm start &
+
+      - name: Aguardar o servidor ficar disponível
+        run: npx wait-on http://localhost:3000 --timeout 30000
+
+      - name: Executar os testes
+        run: npm test
+
