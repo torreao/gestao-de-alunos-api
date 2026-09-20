@@ -1,4 +1,4 @@
-name: Testes de API
+name: Pipeline automatizada de Testes de API
 
 on:
   workflow_dispatch:
