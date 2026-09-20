@@ -1,0 +1,20 @@
+[
+  {
+    "nome": "Marcelo Torreao",
+    "email": "marcelo.torreao@teste.com",
+    "matricula": "20240901",
+    "senha": "Teste@123",
+    "disciplinaId": "disciplina-programacao-web",
+    "tituloTrabalho": "Javascript Basico",
+    "descricaoTrabalho": "Principais funcoes da linguagem"
+  },
+  {
+    "nome": "Claudia Torreao",
+    "email": "claudia.torreao@teste.com",
+    "matricula": "20240902",
+    "senha": "Mudar@1234",
+    "disciplinaId": "disciplina-matematica",
+    "tituloTrabalho": "Matrizes e Determinantes",
+    "descricaoTrabalho": "Resolucao de problemas aplicados"
+  }
+]

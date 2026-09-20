@@ -1,6 +1,7 @@
 name: Testes de API
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -8,6 +9,7 @@ on:
 
 jobs:
   test:
+    name: Executar Testes Automatizados
     runs-on: ubuntu-latest
 
     services:
@@ -34,7 +36,25 @@ jobs:
       - name: Instalar dependências
         run: npm ci
 
-      - name: Executar testes
-        run: npm test
+      - name: Criar arquivo .env
         env:
-          MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+          GIT_SECRETS: ${{ secrets.GIT_SECRETS }}
+        run: |
+          if [ -z "$GIT_SECRETS" ]; then
+            echo "::error::A secret GIT_SECRETS não está configurada no repositório!"
+            exit 1
+          fi
+          echo "$GIT_SECRETS" > .env
+
+      - name: Subir servidor da aplicação
+        run: npm start > api.log 2>&1 &
+
+      - name: Checar disponibilidade da API
+        run: npx wait-on http://127.0.0.1:3000 -t 30000
+
+      - name: Executar testes automatizados
+        run: npm test
+
+      - name: Exibir logs da API em caso de falha
+        if: failure()
+        run: cat api.log || true
